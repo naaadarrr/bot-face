@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en" class="theme-dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bot Avatar Studio</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="studio" data-view="status">
+<nav class="tabs" id="tabs" role="tablist" data-i18n-aria="aria.sections" aria-label="Studio sections">
+  <button type="button" role="tab" id="tab-expressions" data-view="expressions" aria-selected="false" aria-controls="wall" data-i18n="tab.expressions">Expressions</button>
+  <button type="button" role="tab" id="tab-status" data-view="status" aria-selected="true" aria-controls="stageWrap" data-i18n="tab.demo">Status</button>
+  <button type="button" role="tab" id="tab-settings" data-view="settings" aria-selected="false" aria-controls="settingsView" data-i18n="tab.settings">Settings</button>
+</nav>
+<div class="export" id="export">
+  <button type="button" class="export-go" id="btnExport">
+    <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>
+    <span id="exportLabel" data-i18n="export.asPng">Export as PNG</span>
+  </button>
+  <button type="button" class="export-more" id="btnExportMenu" aria-haspopup="menu" aria-expanded="false" aria-controls="exportMenu" data-i18n-aria="export.more" aria-label="More export options">
+    <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4"/></svg>
+  </button>
+  <div class="export-menu" id="exportMenu" role="menu" hidden>
+    <button type="button" role="menuitem" data-export="png" data-i18n="export.png">Download PNG</button>
+    <button type="button" role="menuitem" data-export="svg" data-i18n="export.svg">Download SVG</button>
+    <button type="button" role="menuitem" data-export="svg-anim" data-i18n="export.svgAnim">Download animated SVG</button>
+    <button type="button" role="menuitem" data-export="gif" data-i18n="export.gif">Download animated GIF</button>
+    <div class="export-sep"></div>
+    <button type="button" role="menuitem" data-export="copy-png" data-i18n="export.copyImage">Copy image</button>
+    <button type="button" role="menuitem" data-export="copy-svg" data-i18n="export.copySvg">Copy SVG</button>
+  </div>
+  <p class="export-note" id="exportNote" hidden></p>
+</div>
+<div class="one">
+  <section class="wall" id="wall" aria-label="Expressions"></section>
+  <main class="one-stage" id="stageWrap">
+    <div class="stage" id="stage">
+      <canvas id="main" role="img" aria-label="Bot avatar" data-i18n-aria="aria.avatar"></canvas>
+    </div>
+  </main>
+  <div class="dock" id="exprDock">
+    <div class="play-row">
+      <button type="button" class="play" id="btnPlay" aria-pressed="false" aria-label="Play all expressions">
+        <svg viewBox="0 0 16 16" aria-hidden="true" class="i-play"><path d="M5.5 3.5v9l7-4.5z"/></svg>
+        <svg viewBox="0 0 16 16" aria-hidden="true" class="i-pause"><path d="M5 3.5h2v9H5zM9 3.5h2v9H9z"/></svg>
+      </button>
+    </div>
+    <div class="expr-strip">
+      <div class="expr-scroll">
+        <div class="expr-row" id="picker" role="list" aria-label="Expressions"></div>
+      </div>
+    </div>
+  </div>
+  <section class="settings-view" id="settingsView" hidden data-i18n-aria="aria.settings" aria-label="Settings">
+    <div class="set-block">
+      <h2 data-i18n="h.language">Language</h2>
+      <div class="opt-list" role="radiogroup" data-i18n-aria="h.language" aria-label="Language">
+        <button type="button" role="radio" data-lang="en">English</button>
+        <button type="button" role="radio" data-lang="zh">中文</button>
+        <button type="button" role="radio" data-lang="ko">한국어</button>
+        <button type="button" role="radio" data-lang="ja">日本語</button>
+      </div>
+    </div>
+    <div class="set-block">
+      <h2 data-i18n="h.motion">Motion</h2>
+      <div class="opt-list" role="radiogroup" data-i18n-aria="aria.motion" aria-label="Motion">
+        <button type="button" role="radio" data-motion="animated" data-i18n="motion.animated">Animated</button>
+        <button type="button" role="radio" data-motion="static" data-i18n="motion.static">Static</button>
+      </div>
+    </div>
+    <div class="set-block">
+      <h2 data-i18n="h.background">Background</h2>
+      <div class="opt-list" role="radiogroup" data-i18n-aria="aria.background" aria-label="Background">
+        <button type="button" role="radio" data-bg="dark" data-i18n="bg.dark">Dark — original art background</button>
+        <button type="button" role="radio" data-bg="light" data-i18n="bg.light">Light — exports transparent</button>
+      </div>
+    </div>
+    <div class="set-block">
+      <h2 data-i18n="h.gaze">Gaze</h2>
+      <div class="opt-list" role="radiogroup" data-i18n-aria="aria.gaze" aria-label="Gaze">
+        <button type="button" role="radio" data-follow="1" data-i18n="gaze.follow">Follow the cursor</button>
+        <button type="button" role="radio" data-follow="0" data-i18n="gaze.straight">Look straight ahead</button>
+      </div>
+    </div>
+    <div class="set-block">
+      <h2 data-i18n="h.about">About</h2>
+      <p class="about" data-i18n="about.body">Hair, face shape and outfit are the original art — only the features are drawn live. Move your cursor and she'll look at you.</p>
+      <p class="about" id="rmHint" hidden data-i18n="about.reduced">Reduced motion is on: idle sway and gaze follow are off, and transitions don't overshoot.</p>
+    </div>
+  </section>
+</div>
+<script src="js/i18n.js"></script>
+<script src="js/assets-data.js"></script>
+<script src="js/bot-face.js"></script>
+<script src="js/gifenc.js"></script>
+<script src="js/export.js"></script>
+<script src="js/app.js?v=6"></script>
+</body>
+</html>

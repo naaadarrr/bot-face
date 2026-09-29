@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en" class="theme-dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>All Expressions · Bot Avatar Studio</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="crumb" href="index.html">← Back to studio</a>
+  <h1>All expressions</h1>
+  <p class="sub">Export any expression as a 1024×1024 PNG — dark keeps the original background, light exports with transparency. Exports follow the crop: head uses the studio's fixed 0.90× framing, full is the whole image.</p>
+</header>
+<div class="bar" role="toolbar" aria-label="Sheet options">
+  <button type="button" class="switch" id="btnBg" role="switch" aria-checked="false"><span class="track" aria-hidden="true"></span>Light / transparent</button>
+  <span><span class="seg-label" id="cropLbl">Crop</span><span class="seg" role="radiogroup" aria-labelledby="cropLbl">
+    <button type="button" role="radio" id="cropHead" aria-checked="true">Head</button><button type="button" role="radio" id="cropFull" aria-checked="false">Full</button>
+  </span></span>
+  <button type="button" class="switch" id="btnLive" role="switch" aria-checked="true"><span class="track" aria-hidden="true"></span>Live preview</button>
+  <span class="spacer"></span>
+  <button type="button" class="primary" id="btnAll">Export all</button>
+</div>
+<div class="sheet" id="sheet"></div>
+<script src="js/assets-data.js"></script>
+<script src="js/bot-face.js"></script>
+<script src="js/sheet.js"></script>
+</body>
+</html>

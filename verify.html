@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" class="theme-dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neutral vs Original · Bot Avatar Studio</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="crumb" href="index.html">← Back to studio</a>
+  <h1>Neutral expression vs original art</h1>
+  <p class="sub">Pixel-by-pixel comparison of the live Neutral face against the original. Difference is amplified ×4 (darker = closer).</p>
+</header>
+<pre id="metrics">Calculating…</pre>
+<div class="verify">
+  <figure><canvas id="cOrig" width="1024" height="1024"></canvas><figcaption>Original</figcaption></figure>
+  <figure><canvas id="cLive" width="1024" height="1024"></canvas><figcaption>Blank base + live features (Neutral)</figcaption></figure>
+  <figure><canvas id="cBlend" width="1024" height="1024"></canvas><figcaption>Split: original left / live right (cut between the eyes)</figcaption></figure>
+  <figure><canvas id="cOutline" width="1024" height="1024"></canvas><figcaption>Original with live feature outlines (cyan)</figcaption></figure>
+  <figure><canvas id="cDiff" width="1024" height="1024"></canvas><figcaption>Difference ×4</figcaption></figure>
+  <figure><canvas id="cZoomO" width="640" height="640"></canvas><figcaption>Original, 2× detail (left eye + blush)</figcaption></figure>
+  <figure><canvas id="cZoomL" width="640" height="640"></canvas><figcaption>Live, 2× detail (left eye + blush)</figcaption></figure>
+  <figure><canvas id="cBase" width="1024" height="1024"></canvas><figcaption>Blank-face base (eyes and blush removed)</figcaption></figure>
+  <figure><canvas id="cBaseZ" width="640" height="640"></canvas><figcaption>Base, 2× detail at ×12 contrast (ghosting check)</figcaption></figure>
+</div>
+<script src="js/assets-data.js"></script>
+<script src="js/bot-face.js"></script>
+<script src="js/verify.js"></script>
+</body>
+</html>

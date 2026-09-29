@@ -1,0 +1,7 @@
+work/
+tools/
+shots/
+js.bak-ring/
+node_modules/
+.env
+.env.*

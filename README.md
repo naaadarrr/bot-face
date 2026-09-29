@@ -1,0 +1,14 @@
+# Bot Avatar Studio
+
+Double-click `index.html` — it works straight from file:// (no local fetch, no ES modules).
+
+- `index.html`: the studio page, laid out as an app shell (structure modelled on bloub.vercel.app). One screen: a 540px circular preview, a play button, and all 16 expressions along the bottom. No tabs, export, or settings. The avatar sits centred as a circle crop, with a **Speak** switch under the avatar and the pink split export at the top right (on Status demo the left side saves the 16-expression montage GIF) (menu: PNG, raster-in-SVG, animated SVG, animated GIF, copy image, copy SVG). The right panel shows the 16-expression grid (4×4, vertically centred); in the Settings view it shows background (dark / light-transparent), gaze follow and the about text instead. Status demo adds a scrollable timeline of all 16 expressions (in expression order) under the avatar, with edge fades, play/pause and click-to-jump. Language (English / 中文 / 한국어 / 日本語) is saved in localStorage as `botface.lang` (default English). State lives in the URL hash (`#expr=working&view=demo`), and Animated/Static is saved in localStorage as `botface.motion`. Framing is fixed at 0.90× everywhere (preview, thumbnails, export and the sheet's head crop). All of them render through one `renderHead()` path with `headView(0.9)` at devicePixelRatio ≤ 3, Exports are a square of that framing at 2× the preview's CSS size: PNG (and copy) is one frame; GIF and animated SVG are ~2s at 10 fps. SVG files embed those PNG frames — they are not true vectors. Light background exports are transparent.
+- `sheet.html` — every expression in one grid, each exportable as a 1024×1024 PNG (dark = original background, light = transparent). Exports follow the Crop setting: Head = the fixed 0.90× framed composition, Full = whole original image. Query params: `?still=1` static frame, `?view=full` full image, `?bg=light`.
+- `verify.html` — Neutral vs original art: split view, outline overlay, ×4 difference, blank-base ghosting check.
+- `js/bot-face.js` — Canvas 2D renderer. `new BotFace.Avatar({ expression })` → `update(dt)` / `draw(ctx, W, H, { view, bg })`. Circle framing: `BotFace.headView(zoom)`.
+- `js/assets-data.js` — base art embedded as data URIs (WebP) so the canvas stays untainted over file:// and PNG export works.
+- `assets/` — `base-1024.png` / `base-800.png` (blank face), `cutout-1024.png` (transparent background), `bangs-overlay.png` (fringe mask), `original-1024.png`.
+
+Expressions: Neutral, Happy, Laugh, Smile, Surprised, Sad, Worried, Determined, Shy, Wink, Sleepy, Thinking, Love, Confused, Working (pencil indicator), Speaking.
+
+To add an expression, add an entry to `EXPRESSIONS` in `js/bot-face.js` (per-eye sx/sy/close/bend/lidT/lidTs/lidB/heart/dx/dy plus global mouth/blush/brow/effect params) and append its key to `EXPRESSION_ORDER`.
